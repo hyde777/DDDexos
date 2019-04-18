@@ -45,7 +45,7 @@ namespace Tests
         }
 
         [Test]
-        public void Un_créneau_devrait_commencer_a_pile()
+        public void Un_créneau_devrait_commencer_a_pile_ou_30()
         {
             DateTime midiPile = new DateTime(2020, 1, 10, 12, 15, 00);
             TimeSpan duréeDeCreneau = TimeSpan.FromHours(5);
@@ -54,6 +54,18 @@ namespace Tests
                 new Creneau(midiPile, duréeDeCreneau)
             );
         }
+
+        [Test]
+        public void Un_créneau_devrait_finir_a_pile_ou_30()
+        {
+            DateTime midiPile = new DateTime(2020, 1, 10, 12, 00, 00);
+            TimeSpan duréeDeCreneau = TimeSpan.FromMinutes(95);
+
+            Assert.Throws<HeureIncorrecteException>(() =>
+                new Creneau(midiPile, duréeDeCreneau)
+            );
+        }
+
 
     }
 }

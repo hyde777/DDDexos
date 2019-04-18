@@ -12,15 +12,14 @@ namespace exos
 
         public Creneau(DateTime date, TimeSpan durée)
         {
-            int[] minute =new int[] { 00, 30 };
-            if (!minute.Contains(date.Minute))
-                throw new HeureIncorrecteException();
-            if (date.Second != 00 && date.Millisecond != 00)
-                throw new HeureIncorrecteException();
             this.début = date;
+            if (!Enum.IsDefined(typeof(AcceptableMinutes), this.début.Minute))
+                throw new HeureIncorrecteException();
             if (durée < TimeSpan.FromHours(1))
                 throw new DuréeMinimaleInvalideException();
             this.fin = date.Add(durée);
+            if (!Enum.IsDefined(typeof(AcceptableMinutes), this.fin.Minute))
+                throw new HeureIncorrecteException();
         }
 
         public override bool Equals(object obj)
