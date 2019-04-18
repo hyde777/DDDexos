@@ -4,7 +4,7 @@ using exos;
 
 namespace Tests
 {
-    public class Tests
+    public class TestCréneau
     {
         [SetUp]
         public void Setup()
