@@ -45,9 +45,9 @@ namespace Tests
         }
 
         [Test]
-        public void Un_créneau_devrait_commencer_a_pile_ou_a_30()
+        public void Un_créneau_devrait_commencer_a_pile()
         {
-            DateTime midiPile = new DateTime(2020, 1, 10, 12, 00, 00);
+            DateTime midiPile = new DateTime(2020, 1, 10, 12, 15, 00);
             TimeSpan duréeDeCreneau = TimeSpan.FromHours(5);
 
             Assert.Throws<HeureIncorrecteException>(() =>

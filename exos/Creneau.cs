@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,10 +12,11 @@ namespace exos
 
         public Creneau(DateTime date, TimeSpan durée)
         {
-        //    if (date.Minute != 00 || date.Minute != 30)
-        //        throw new HeureIncorrecteException();
-            //if (date.Second != 00 && date.Millisecond != 00)
-            //    throw new HeureIncorrecteException();
+            int[] minute =new int[] { 00, 30 };
+            if (!minute.Contains(date.Minute))
+                throw new HeureIncorrecteException();
+            if (date.Second != 00 && date.Millisecond != 00)
+                throw new HeureIncorrecteException();
             this.début = date;
             if (durée < TimeSpan.FromHours(1))
                 throw new DuréeMinimaleInvalideException();
