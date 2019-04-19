@@ -34,5 +34,10 @@ namespace exos
             }
             return false; 
         }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
