@@ -9,11 +9,12 @@ namespace exos
         private readonly EntretienID id;
         public EntretienStatut statut;
         public readonly Candidat candidat;
+        private readonly Salle salle;
         private Recruteur recruteur;
 
         public Creneau créneau { get; private set; }
 
-        public Entretien(EntretienID id, Creneau créneau, EntretienStatut statut, Candidat candidat, Recruteur recruteur)
+        public Entretien(EntretienID id, Creneau créneau, EntretienStatut statut, Candidat candidat, Recruteur recruteur, Salle salle)
         {
             if (recruteur.spécialité != candidat.spécialité)
                 throw new SpécialitéIncompatibleException();
@@ -26,6 +27,7 @@ namespace exos
             this.statut = statut;
             this.recruteur = recruteur;
             this.candidat = candidat;
+            this.salle = salle;
         }
 
         public void Confirmer()
@@ -77,14 +79,17 @@ namespace exos
 
         public bool PeutSePlanifierParRapport(Entretien entretien)
         {
-            if (entretien.créneau == créneau
-                && entretien.candidat == candidat)
-                return false;
+            if (entretien.créneau == créneau)
+            {
+                if (entretien.candidat == candidat)
+                    return false;
 
-            if (entretien.créneau == créneau
-                && entretien.recruteur == recruteur)
-                return false;
+                if (entretien.recruteur == recruteur)
+                    return false;
 
+                if (entretien.salle == salle)
+                    return false;
+            }
             return true;
         }
     }
