@@ -1,26 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
+[assembly: InternalsVisibleTo("ExoTest")]
 namespace exos
 {
     public class Entretien
     {
         private readonly EntretienID id;
-        public EntretienStatut statut;
-        public readonly Candidat candidat;
+        internal EntretienStatut statut;
+        internal readonly Candidat candidat;
         private readonly Salle salle;
         private Recruteur recruteur;
 
-        public Creneau créneau { get; private set; }
+        internal Creneau créneau { get; private set; }
 
-        public Entretien(EntretienID id, Creneau créneau, EntretienStatut statut, Candidat candidat, Recruteur recruteur, Salle salle)
+        public Entretien(EntretienID id, 
+                         Creneau créneau,
+                         EntretienStatut statut,
+                         Candidat candidat,
+                         Recruteur recruteur, 
+                         Salle salle)
         {
             if (recruteur.spécialité != candidat.spécialité)
                 throw new SpécialitéIncompatibleException();
 
             if (recruteur.jourDexpérience <= candidat.jourDexpérience)
                 throw new RecruteurSousExpérimenterException();
+
+            if (salle.statut == SalleStatut.Occupée)
+                throw new SalleOccuperException();
 
             this.id = id;
             this.créneau = créneau;

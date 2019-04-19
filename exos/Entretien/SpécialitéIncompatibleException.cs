@@ -2,7 +2,7 @@
 
 namespace exos
 {
-    public class SpécialitéIncompatibleException : Exception
+    internal class SpécialitéIncompatibleException : Exception
     {
     }
 }

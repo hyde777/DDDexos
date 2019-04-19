@@ -7,9 +7,9 @@ namespace exos
     public class Salle
     {
         public readonly string nameId;
-        public readonly SalleStatut statut;
+        internal readonly SalleStatut statut;
 
-        public Salle(string nameId, SalleStatut statut)
+        internal Salle(string nameId, SalleStatut statut)
         {
             this.nameId = nameId;
             this.statut = statut;

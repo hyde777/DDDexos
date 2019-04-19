@@ -4,7 +4,7 @@ using System.Text;
 
 namespace exos
 {
-    public class HeureIncorrecteException : Exception
+    internal class HeureIncorrecteException : Exception
     {
     }
 }

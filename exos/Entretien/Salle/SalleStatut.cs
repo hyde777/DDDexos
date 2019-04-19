@@ -1,6 +1,6 @@
 ﻿namespace exos
 {
-    public enum SalleStatut
+    internal enum SalleStatut
     {
         Libre,
         Occupée

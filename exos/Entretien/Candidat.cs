@@ -5,10 +5,10 @@ namespace exos
     public class Candidat
     {
         public readonly string nom;
-        public readonly Spécialité spécialité;
+        internal readonly Spécialité spécialité;
         public readonly TimeSpan jourDexpérience;
 
-        public Candidat(string nom, Spécialité spécialité, TimeSpan jourDexpérience)
+        internal Candidat(string nom, Spécialité spécialité, TimeSpan jourDexpérience)
         {
             this.nom = nom;
             this.spécialité = spécialité;

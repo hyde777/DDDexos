@@ -4,7 +4,7 @@ using System.Text;
 
 namespace exos
 {
-    internal class DuréeMinimaleInvalideException : Exception
+    internal class SalleOccuperException : Exception
     {
     }
 }

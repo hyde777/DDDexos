@@ -4,7 +4,7 @@ using System.Text;
 
 namespace exos
 {
-    public class RecruteurSousExpérimenterException : Exception
+    internal class RecruteurSousExpérimenterException : Exception
     {
     }
 }

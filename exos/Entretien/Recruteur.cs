@@ -5,10 +5,10 @@ namespace exos
     public class Recruteur
     {
         public readonly string nom;
-        public readonly Spécialité spécialité;
+        internal readonly Spécialité spécialité;
         public readonly TimeSpan jourDexpérience;
 
-        public Recruteur(string name, Spécialité spécialité, TimeSpan jourDexpérience)
+        internal Recruteur(string name, Spécialité spécialité, TimeSpan jourDexpérience)
         {
             this.nom = name;
             this.spécialité = spécialité;

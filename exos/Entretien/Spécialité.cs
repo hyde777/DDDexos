@@ -1,6 +1,6 @@
 ﻿namespace exos
 {
-    public enum Spécialité
+    internal enum Spécialité
     {
         csharp,
         java,

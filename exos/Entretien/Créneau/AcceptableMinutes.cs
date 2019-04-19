@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace exos
 {
-    public enum AcceptableMinutes
+    internal enum AcceptableMinutes
     {
         Pile = 00,
         Etdemie = 30
