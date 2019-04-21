@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
-
-namespace Model
+﻿namespace Model
 {
     internal enum AcceptableMinutes
     {

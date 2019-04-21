@@ -1,6 +1,12 @@
 ﻿namespace Model
 {
-    public class Raison
+    internal class Raison
     {
+        private string raison;
+
+        internal Raison(string raison)
+        {
+            this.raison = raison;
+        }
     }
 }

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Model
 {
-    public class Creneau
+    internal class Creneau
     {
         public readonly DateTime début;
         public readonly DateTime fin;

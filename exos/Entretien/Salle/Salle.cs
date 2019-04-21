@@ -3,7 +3,7 @@ using Commun;
 
 namespace Model
 {
-    public class Salle
+    internal class Salle
     {
         public readonly string nameId;
         internal readonly SalleStatut statut;

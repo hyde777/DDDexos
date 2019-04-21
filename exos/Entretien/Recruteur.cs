@@ -3,7 +3,7 @@ using Commun;
 
 namespace Model
 {
-    public class Recruteur
+    internal class Recruteur
     {
         public readonly string nom;
         internal readonly Spécialité spécialité;

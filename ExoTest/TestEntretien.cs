@@ -2,6 +2,7 @@
 using System;
 using Model;
 using Commun;
+using Commun.Dto;
 
 namespace Tests
 {
@@ -69,7 +70,6 @@ namespace Tests
         [Test]
         public void Un_entretien_devrait_etre_annuler()
         {
-            Raison raison = new Raison();
             Entretien sut = new Entretien(
                 new EntretienID(2),
                 creneau,
@@ -77,14 +77,13 @@ namespace Tests
                 candidatCsharp,
                 recruteurCsharpExpérimenter,
                 salle1);
-            sut.Annuler(raison);
+            sut.Annuler("Une raison d'annullation");
             Assert.That(sut.statut, Is.EqualTo(EntretienStatut.Annuler));
         }
 
         [Test]
         public void Un_entretien_devrait_etre_replanifier()
         {
-            Raison raison = new Raison();
             Entretien sut = new Entretien(
                 new EntretienID(2),
                 creneau,
@@ -92,7 +91,7 @@ namespace Tests
                 candidatCsharp,
                 recruteurCsharpExpérimenter,
                 salle1);
-            sut.Replanifier(new Creneau(new DateTime(2020, 10, 10, 9, 0, 0), TimeSpan.FromHours(2)));
+            sut.Replanifier(new CréneauDto { date = new DateTime(2020, 10, 10, 9, 0, 0), durée = TimeSpan.FromHours(2) });
             Assert.That(sut.statut, Is.EqualTo(EntretienStatut.Replanifier));
             Assert.That(sut.créneau, Is.Not.EqualTo(creneau));
         }

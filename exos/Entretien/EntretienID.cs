@@ -1,6 +1,6 @@
 ﻿namespace Model
 {
-    public class EntretienID
+    internal class EntretienID
     {
         public readonly int id;
         public EntretienID(int id)
