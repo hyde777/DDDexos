@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace exos
+namespace Model
 {
     internal class RecruteurSousExpérimenterException : Exception
     {

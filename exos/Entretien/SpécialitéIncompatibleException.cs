@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace exos
+namespace Model
 {
     internal class SpécialitéIncompatibleException : Exception
     {

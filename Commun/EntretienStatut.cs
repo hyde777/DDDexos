@@ -1,4 +1,4 @@
-﻿namespace exos
+﻿namespace Commun
 {
     public enum EntretienStatut
     {

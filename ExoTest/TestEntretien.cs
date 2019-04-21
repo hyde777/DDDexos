@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
-using exos;
-using Moq;
+using Model;
+using Commun;
 
 namespace Tests
 {

@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using Commun;
 
-namespace exos
+namespace Model
 {
     public class Salle
     {

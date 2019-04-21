@@ -1,6 +1,6 @@
 using NUnit.Framework;
 using System;
-using exos;
+using Model;
 
 namespace Tests
 {

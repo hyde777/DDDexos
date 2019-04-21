@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Text;
+using Commun.Dto;
+using Commun;
 
-[assembly: InternalsVisibleTo("ExoTest")]
-namespace exos
+[assembly: InternalsVisibleTo("ModelTest")]
+namespace Model
 {
     public class Entretien
     {
@@ -16,17 +17,33 @@ namespace exos
 
         internal Creneau créneau { get; private set; }
 
-        public Entretien(EntretienID id, 
-                         Creneau créneau,
+        public Entretien(int id,
+                         CréneauDto créneau,
                          EntretienStatut statut,
-                         Candidat candidat,
-                         Recruteur recruteur, 
-                         Salle salle)
+                         CandidatDto candidat,
+                         RecruteurDto recruteur,
+                         SalleDto salle)
+                            : this(new EntretienID(id),
+                                   new Creneau(créneau.date, créneau.durée),
+                                   statut,
+                                   new Candidat(candidat.name, candidat.spécialité, candidat.expérience),
+                                   new Recruteur(recruteur.name, recruteur.spécialité, recruteur.expérience),
+                                   new Salle(salle.name, salle.statut))
+        {
+            
+        }
+
+        internal Entretien(EntretienID id,
+                          Creneau créneau,
+                          EntretienStatut statut,
+                          Candidat candidat,
+                          Recruteur recruteur,
+                          Salle salle)
         {
             if (recruteur.spécialité != candidat.spécialité)
                 throw new SpécialitéIncompatibleException();
 
-            if (recruteur.jourDexpérience <= candidat.jourDexpérience)
+            if (recruteur.expérience <= candidat.expérience)
                 throw new RecruteurSousExpérimenterException();
 
             if (salle.statut == SalleStatut.Occupée)

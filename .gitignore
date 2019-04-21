@@ -1,5 +1,3 @@
-exos/bin
-exos/obj
-ExoTest/bin
-ExoTest/obj
 .vs
+**/bin
+**/obj

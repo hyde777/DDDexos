@@ -1,4 +1,4 @@
-﻿namespace exos
+﻿namespace Model
 {
     public class Raison
     {
