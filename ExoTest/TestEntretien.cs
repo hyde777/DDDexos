@@ -32,7 +32,7 @@ namespace Tests
         public void Un_entretien_ne_devrait_pas_etre_egale_a_un_autre_entretien()
         {
             Entretien sut = new Entretien(
-                new EntretienID(2),
+                2,
                 creneau,
                 statut,
                 candidatCsharp,
@@ -40,7 +40,7 @@ namespace Tests
                 salle1);
 
             Entretien autreEntretien = new Entretien(
-                new EntretienID(4),
+                4,
                 creneau,
                 statut,
                 candidatCsharp,
@@ -55,7 +55,7 @@ namespace Tests
         {
             // When
             Entretien sut = new Entretien(
-                new EntretienID(2),
+                2,
                 creneau,
                 statut,
                 candidatCsharp,
@@ -71,7 +71,7 @@ namespace Tests
         public void Un_entretien_devrait_etre_annuler()
         {
             Entretien sut = new Entretien(
-                new EntretienID(2),
+                2,
                 creneau,
                 statut,
                 candidatCsharp,
@@ -85,7 +85,7 @@ namespace Tests
         public void Un_entretien_devrait_etre_replanifier()
         {
             Entretien sut = new Entretien(
-                new EntretienID(2),
+                2,
                 creneau,
                 statut,
                 candidatCsharp,
@@ -100,7 +100,7 @@ namespace Tests
         public void Deux_entretien_ne_doivent_pas_se_chevaucher_avec_un_même_candidat()
         {
             Entretien sut = new Entretien(
-                new EntretienID(2),
+                2,
                 creneau,
                 statut,
                 candidatCsharp,
@@ -108,7 +108,7 @@ namespace Tests
                 salle1);
 
             Entretien autreEntretien = new Entretien(
-                new EntretienID(3),
+                3,
                 creneau,
                 statut,
                 candidatCsharp,
@@ -124,7 +124,7 @@ namespace Tests
         public void Un_entretien_peut_suivre_un_autre_entretien_avec_un_même_candidat()
         {
             Entretien entretien = new Entretien(
-                new EntretienID(2),
+                2,
                 creneau,
                 statut,
                 candidatCsharp,
@@ -133,7 +133,7 @@ namespace Tests
 
             Creneau justeAprèsLautreCréneau = new Creneau(entretien.créneau.fin, TimeSpan.FromHours(2));
             Entretien sut = new Entretien(
-                new EntretienID(3),
+                3,
                 justeAprèsLautreCréneau,
                 statut,
                 candidatCsharp,
@@ -147,7 +147,7 @@ namespace Tests
         public void Un_entretien_peut_précédé_un_autre_entretien_avec_un_même_candidat()
         {
             Entretien entretien = new Entretien(
-                new EntretienID(2),
+                2,
                 creneau,
                 statut,
                 candidatCsharp,
@@ -157,7 +157,7 @@ namespace Tests
             DateTime deuxheuresAvantEntretien = entretien.créneau.début - TimeSpan.FromHours(2);
             Creneau justeAvantLautreCréneau = new Creneau(deuxheuresAvantEntretien, TimeSpan.FromHours(2));
             Entretien sut = new Entretien(
-                new EntretienID(3),
+                3,
                 justeAvantLautreCréneau,
                 statut,
                 candidatCsharp,
@@ -171,7 +171,7 @@ namespace Tests
         public void Deux_Recruteur_peuvent_faire_passer_deux_entretien_dans_le_même_créneau()
         {
             Entretien entretien = new Entretien(
-                new EntretienID(2),
+                2,
                 creneau,
                 statut,
                 candidatCsharp,
@@ -179,7 +179,7 @@ namespace Tests
                 salle1);
 
             Entretien sut = new Entretien(
-                new EntretienID(3),
+                3,
                 creneau,
                 statut,
                 new Candidat("Hamza", Spécialité.c, TimeSpan.FromDays(200)),
@@ -193,7 +193,7 @@ namespace Tests
         public void Un_Recruteur_ne_peut_pas_passer_deux_entretien_en_même_temps()
         {
             Entretien entretien = new Entretien(
-                new EntretienID(2),
+                2,
                 creneau,
                 statut,
                 candidatCsharp,
@@ -201,7 +201,7 @@ namespace Tests
                 salle1);
 
             Entretien sut = new Entretien(
-                new EntretienID(3),
+                3,
                 creneau,
                 statut,
                 new Candidat("Leeroy", Spécialité.csharp, TimeSpan.FromDays(2)),
@@ -215,7 +215,7 @@ namespace Tests
         public void Un_entretien_doit_être_planifier_entre_un_candidat_et_un_recruteur_de_même_spécialité()
         {
             Assert.Throws<SpécialitéIncompatibleException>(() => new Entretien(
-                new EntretienID(2),
+                2,
                 creneau,
                 statut,
                 candidatCsharp,
@@ -228,7 +228,7 @@ namespace Tests
         {
             Recruteur recruteurCSharpSousExpérimenter = new Recruteur("mickael", Spécialité.csharp, TimeSpan.FromDays(700));
             Assert.Throws<RecruteurSousExpérimenterException>(() => new Entretien(
-                new EntretienID(2),
+                2,
                 creneau,
                 statut,
                 candidatCsharp,
@@ -241,14 +241,14 @@ namespace Tests
         public void Deux_entretiens_du_même_créneau_ne_peuvent_pas_être_passer_dans_la_même_salle()
         {
             Entretien sut = new Entretien(
-                new EntretienID(2),
+                2,
                 creneau,
                 statut,
                 candidatCsharp,
                 recruteurCsharpExpérimenter,
                 salle1);
             Entretien autreEntretien = new Entretien(
-                new EntretienID(3),
+                3,
                 creneau,
                 statut,
                 new Candidat("Louis", Spécialité.java, TimeSpan.FromDays(500)),
@@ -263,7 +263,7 @@ namespace Tests
         {
             Salle salleOccuper = new Salle("Kilimanjaro", SalleStatut.Occupée);
             Assert.Throws<SalleOccuperException>(() => new Entretien(
-                new EntretienID(2),
+                2,
                 creneau,
                 statut,
                 candidatCsharp,

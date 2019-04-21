@@ -9,8 +9,8 @@ namespace Model
 {
     public class Entretien
     {
-        private readonly EntretienID id;
-        internal EntretienStatut statut;
+        public readonly int id;
+        public EntretienStatut statut { get; private set; }
         internal readonly Candidat candidat;
         private readonly Salle salle;
         private Recruteur recruteur;
@@ -24,7 +24,7 @@ namespace Model
                          CandidatDto candidat,
                          RecruteurDto recruteur,
                          SalleDto salle)
-                            : this(new EntretienID(id),
+                            : this(id,
                                    new Creneau(créneau.date, créneau.durée),
                                    statut,
                                    new Candidat(candidat.name, candidat.spécialité, candidat.expérience),
@@ -34,7 +34,7 @@ namespace Model
             
         }
 
-        internal Entretien(EntretienID id,
+        internal Entretien(int id,
                           Creneau créneau,
                           EntretienStatut statut,
                           Candidat candidat,
