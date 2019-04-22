@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Commun.Dto;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,7 +22,7 @@ namespace Application
             if(enume.Exists(ent => ent.id == id))
             {
                 Entretien entretien = enume.Find(ent => ent.id == id);
-                entretien.Annuler(raison);
+                entretien.Annuler(new RaisonDto { raison = this.raison });
                 enume.Remove(entretien);
                 enume.Add(entretien);
                 return enume;
