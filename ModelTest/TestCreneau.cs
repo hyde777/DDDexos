@@ -2,7 +2,7 @@ using NUnit.Framework;
 using System;
 using Model;
 
-namespace Tests
+namespace Tests.Creneaus
 {
     public class TestCreneau
     {
