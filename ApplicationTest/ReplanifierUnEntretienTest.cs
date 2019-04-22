@@ -6,12 +6,14 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Commun;
+using Moq;
 
 namespace ApplicationTest
 {
     public class ReplanifierUnEntretienTest
     {
         CreneauDto creneau2;
+        private Mock<IGenerateur<int>> genMock;
         IUseCase<Entretien> planifierUnEntretien;
         [SetUp]
         public void Setup()
@@ -43,13 +45,15 @@ namespace ApplicationTest
             };
 
             SalleDto salle = new SalleDto { name = "kilimanjaro", statut = SalleStatut.Libre };
-            planifierUnEntretien = new PlanifierUnEntretien(1, creneau, candidat, recruteur, salle);
+            genMock = new Mock<IGenerateur<int>>();
+            genMock.Setup(gen => gen.GetNewId()).Returns(1);
+            planifierUnEntretien = new PlanifierUnEntretien(genMock.Object, creneau, candidat, recruteur, salle);
         }
 
         [Test]
         public void Ne_peut_pas_replanifier_un_entretien_non_existant()
         {
-            IUseCase<Entretien> sut = new ReplanifierUnEntretien(1, creneau2);
+            IUseCase<Entretien> sut = new ReplanifierUnEntretien(genMock.Object, creneau2);
 
             List<Entretien> entretiens = new List<Entretien>();
 
@@ -59,7 +63,7 @@ namespace ApplicationTest
         [Test]
         public void Peut_replanifier_un_entretien()
         {
-            IUseCase<Entretien> sut = new ReplanifierUnEntretien(1, creneau2);
+            IUseCase<Entretien> sut = new ReplanifierUnEntretien(genMock.Object, creneau2);
 
             IEnumerable<Entretien> entretiens = new List<Entretien>();
 

@@ -11,13 +11,13 @@ namespace Application
     public class PlanifierUnEntretien : IUseCase<Entretien>
     {
         private Entretien entretien;
-        public PlanifierUnEntretien(int id,
+        public PlanifierUnEntretien(IGenerateur<int> generateur,
                                     CreneauDto creneau, 
                                     CandidatDto candidat, 
                                     RecruteurDto recruteur,
                                     SalleDto salle)
         {
-            entretien = new Entretien(id,
+            entretien = new Entretien(generateur.GetNewId(),
                                       creneau,
                                       EntretienStatut.Planifier,
                                       candidat,

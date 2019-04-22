@@ -6,14 +6,15 @@ using System.Text;
 
 namespace Application
 {
-    public class ReplanifierUnEntretien : IUseCase<Entretien>
+    public class AnnulerUnEntretien : IUseCase<Entretien>
     {
         private int id;
-        private CreneauDto creneau;
-        public ReplanifierUnEntretien(int id, CreneauDto creneau)
+        private string raison;
+
+        public AnnulerUnEntretien(IGenerateur<int> generateur, string raison)
         {
-            this.id = id;
-            this.creneau = creneau;
+            this.id = generateur.GetNewId();
+            this.raison = raison;
         }
 
         public IEnumerable<Entretien> Execute(List<Entretien> enume)
@@ -21,8 +22,8 @@ namespace Application
             if(enume.Exists(ent => ent.id == id))
             {
                 Entretien entretien = enume.Find(ent => ent.id == id);
+                entretien.Annuler(new RaisonDto { raison = this.raison });
                 enume.Remove(entretien);
-                entretien.Replanifier(creneau);
                 enume.Add(entretien);
                 return enume;
             }

@@ -6,6 +6,7 @@ using Commun;
 using Commun.Dto;
 using System;
 using System.Linq;
+using Moq;
 
 namespace ApplicationTest
 {
@@ -15,6 +16,8 @@ namespace ApplicationTest
         CandidatDto candidat;
         RecruteurDto recruteur;
         SalleDto salle;
+        private Mock<IGenerateur<int>> genMock;
+
         [SetUp]
         public void Setup()
         {
@@ -39,13 +42,15 @@ namespace ApplicationTest
             };
 
             salle = new SalleDto { name = "kilimanjaro", statut = SalleStatut.Libre };
+            genMock = new Mock<IGenerateur<int>>();
+            genMock.Setup(gen => gen.GetNewId()).Returns(1);
         }
 
         [Test]
         public void Devrait_ajouter_un_nouvel_entretien()
         {
            
-            IUseCase<Entretien> planifierUnEntretien = new PlanifierUnEntretien(1, creneau, candidat, recruteur, salle);
+            IUseCase<Entretien> planifierUnEntretien = new PlanifierUnEntretien(genMock.Object, creneau, candidat, recruteur, salle);
 
             IEnumerable<Entretien> entretiens = new List<Entretien>();
             IEnumerable<Entretien> sut = planifierUnEntretien.Execute(entretiens.ToList());
@@ -58,8 +63,8 @@ namespace ApplicationTest
         [Test]
         public void Ne_devrait_pas_ajouter_un_nouvel_entretien_sil_est_dejà_present()
         {
-            IUseCase<Entretien> planifierUnEntretien = new PlanifierUnEntretien(1, creneau, candidat, recruteur, salle);
-            IUseCase<Entretien> planifierUnEntretien2 = new PlanifierUnEntretien(1, creneau, candidat, recruteur, salle);
+            IUseCase<Entretien> planifierUnEntretien = new PlanifierUnEntretien(genMock.Object, creneau, candidat, recruteur, salle);
+            IUseCase<Entretien> planifierUnEntretien2 = new PlanifierUnEntretien(genMock.Object, creneau, candidat, recruteur, salle);
 
             IEnumerable<Entretien> entretiens = new List<Entretien>();
             entretiens = planifierUnEntretien.Execute(entretiens.ToList());

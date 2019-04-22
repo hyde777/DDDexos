@@ -6,12 +6,15 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Moq;
 
 namespace ApplicationTest
 {
     public class AnnulerUnEntretienTest
     {
         IUseCase<Entretien> planifierUnEntretien;
+        private Mock<IGenerateur<int>> genMock;
+
         [SetUp]
         public void Setup()
         {
@@ -36,14 +39,16 @@ namespace ApplicationTest
             };
 
             SalleDto salle = new SalleDto { name = "kilimanjaro", statut = SalleStatut.Libre };
-            planifierUnEntretien = new PlanifierUnEntretien(1, creneau, candidat, recruteur, salle);
+            genMock = new Mock<IGenerateur<int>>();
+            genMock.Setup(gen => gen.GetNewId()).Returns(1);
+            planifierUnEntretien = new PlanifierUnEntretien(genMock.Object, creneau, candidat, recruteur, salle);
         }
 
         [Test]
         public void Ne_peut_pas_annuler_un_entretien_non_existant()
         {
             IEnumerable<Entretien> entretiens = new List<Entretien>();
-            AnnulerUnEntretien annulerUnEntretien = new AnnulerUnEntretien(1, "parce que j'en ai envie");
+            AnnulerUnEntretien annulerUnEntretien = new AnnulerUnEntretien(genMock.Object, "parce que j'en ai envie");
             Assert.Throws<EntretienNonExistantException>(() => annulerUnEntretien.Execute(entretiens.ToList()));
         }
 
@@ -52,7 +57,7 @@ namespace ApplicationTest
         {
             IEnumerable<Entretien> entretiens = new List<Entretien>();
             entretiens = planifierUnEntretien.Execute(entretiens.ToList());
-            AnnulerUnEntretien annulerUnEntretien = new AnnulerUnEntretien(1, "parce que j'en ai envie");
+            AnnulerUnEntretien annulerUnEntretien = new AnnulerUnEntretien(genMock.Object, "parce que j'en ai envie");
             entretiens = annulerUnEntretien.Execute(entretiens.ToList());
 
             Assert.That(entretiens.Count(), Is.EqualTo(1));
