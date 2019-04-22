@@ -11,45 +11,45 @@ namespace ApplicationTest
 {
     public class ReplanifierUnEntretienTest
     {
-        CréneauDto créneau2;
+        CreneauDto creneau2;
         IUseCase<Entretien> planifierUnEntretien;
         [SetUp]
         public void Setup()
         {
-            créneau2 = new CréneauDto
+            creneau2 = new CreneauDto
             {
                 date = new DateTime(2019, 10, 9, 12, 00, 00),
-                durée = TimeSpan.FromHours(2)
+                duree = TimeSpan.FromHours(2)
             };
 
-            CréneauDto créneau = new CréneauDto
+            CreneauDto creneau = new CreneauDto
             {
                 date = new DateTime(2019, 10, 9, 10, 00, 00),
-                durée = TimeSpan.FromHours(2)
+                duree = TimeSpan.FromHours(2)
             };
 
             CandidatDto candidat = new CandidatDto
             {
-                expérience = TimeSpan.FromDays(500),
+                experience = TimeSpan.FromDays(500),
                 name = "Willy",
-                spécialité = Spécialité.csharp
+                specialite = Specialite.csharp
             };
 
             RecruteurDto recruteur = new RecruteurDto
             {
-                expérience = TimeSpan.FromDays(5000),
+                experience = TimeSpan.FromDays(5000),
                 name = "Yohan",
-                spécialité = Spécialité.csharp
+                specialite = Specialite.csharp
             };
 
             SalleDto salle = new SalleDto { name = "kilimanjaro", statut = SalleStatut.Libre };
-            planifierUnEntretien = new PlanifierUnEntretien(1, créneau, candidat, recruteur, salle);
+            planifierUnEntretien = new PlanifierUnEntretien(1, creneau, candidat, recruteur, salle);
         }
 
         [Test]
         public void Ne_peut_pas_replanifier_un_entretien_non_existant()
         {
-            IUseCase<Entretien> sut = new ReplanifierUnEntretien(1, créneau2);
+            IUseCase<Entretien> sut = new ReplanifierUnEntretien(1, creneau2);
 
             List<Entretien> entretiens = new List<Entretien>();
 
@@ -59,7 +59,7 @@ namespace ApplicationTest
         [Test]
         public void Peut_replanifier_un_entretien()
         {
-            IUseCase<Entretien> sut = new ReplanifierUnEntretien(1, créneau2);
+            IUseCase<Entretien> sut = new ReplanifierUnEntretien(1, creneau2);
 
             IEnumerable<Entretien> entretiens = new List<Entretien>();
 

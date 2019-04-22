@@ -12,13 +12,13 @@ namespace Application
     {
         private Entretien entretien;
         public PlanifierUnEntretien(int id,
-                                    CréneauDto créneau, 
+                                    CreneauDto creneau, 
                                     CandidatDto candidat, 
                                     RecruteurDto recruteur,
                                     SalleDto salle)
         {
             entretien = new Entretien(id,
-                                      créneau,
+                                      creneau,
                                       EntretienStatut.Planifier,
                                       candidat,
                                       recruteur,

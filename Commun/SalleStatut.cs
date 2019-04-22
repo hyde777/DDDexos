@@ -3,6 +3,6 @@
     public enum SalleStatut
     {
         Libre,
-        Occupée
+        Occupee
     }
 }

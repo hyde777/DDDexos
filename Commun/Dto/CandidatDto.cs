@@ -7,7 +7,7 @@ namespace Commun.Dto
     public  class CandidatDto
     {
         public string name;
-        public Spécialité spécialité;
-        public TimeSpan expérience;
+        public Specialite specialite;
+        public TimeSpan experience;
     }
 }

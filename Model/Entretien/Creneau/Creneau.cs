@@ -4,17 +4,17 @@ namespace Model
 {
     internal class Creneau
     {
-        public readonly DateTime début;
+        public readonly DateTime debut;
         public readonly DateTime fin;
 
-        public Creneau(DateTime date, TimeSpan durée)
+        public Creneau(DateTime date, TimeSpan duree)
         {
-            this.début = date;
-            if (!Enum.IsDefined(typeof(AcceptableMinutes), this.début.Minute))
+            this.debut = date;
+            if (!Enum.IsDefined(typeof(AcceptableMinutes), this.debut.Minute))
                 throw new HeureIncorrecteException();
-            if (durée < TimeSpan.FromHours(1))
-                throw new DuréeMinimaleInvalideException();
-            this.fin = date.Add(durée);
+            if (duree < TimeSpan.FromHours(1))
+                throw new DureeMinimaleInvalideException();
+            this.fin = date.Add(duree);
             if (!Enum.IsDefined(typeof(AcceptableMinutes), this.fin.Minute))
                 throw new HeureIncorrecteException();
         }
@@ -23,7 +23,7 @@ namespace Model
         {
             if (obj is Creneau cr)
             {
-                if(cr.début == début
+                if(cr.debut == debut
                     && cr.fin == fin)
                 {
                     return true;

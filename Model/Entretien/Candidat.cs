@@ -6,22 +6,22 @@ namespace Model
     internal class Candidat
     {
         public readonly string nom;
-        internal readonly Spécialité spécialité;
-        public readonly TimeSpan expérience;
+        internal readonly Specialite specialite;
+        public readonly TimeSpan experience;
 
-        internal Candidat(string nom, Spécialité spécialité, TimeSpan jourDexpérience)
+        internal Candidat(string nom, Specialite specialite, TimeSpan jourDexperience)
         {
             this.nom = nom;
-            this.spécialité = spécialité;
-            this.expérience = jourDexpérience;
+            this.specialite = specialite;
+            this.experience = jourDexperience;
         }
 
         public override bool Equals(object obj)
         {
             if (obj is Candidat c)
                 if (c.nom == nom
-                    && c.spécialité == spécialité
-                    && c.expérience == expérience)
+                    && c.specialite == specialite
+                    && c.experience == experience)
                     return true;
 
             return false;

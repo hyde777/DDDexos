@@ -16,42 +16,42 @@ namespace Model
         private Recruteur recruteur;
         private Raison raison;
 
-        internal Creneau créneau { get; private set; }
+        internal Creneau creneau { get; private set; }
 
         public Entretien(int id,
-                         CréneauDto créneau,
+                         CreneauDto creneau,
                          EntretienStatut statut,
                          CandidatDto candidat,
                          RecruteurDto recruteur,
                          SalleDto salle)
                             : this(id,
-                                   new Creneau(créneau.date, créneau.durée),
+                                   new Creneau(creneau.date, creneau.duree),
                                    statut,
-                                   new Candidat(candidat.name, candidat.spécialité, candidat.expérience),
-                                   new Recruteur(recruteur.name, recruteur.spécialité, recruteur.expérience),
+                                   new Candidat(candidat.name, candidat.specialite, candidat.experience),
+                                   new Recruteur(recruteur.name, recruteur.specialite, recruteur.experience),
                                    new Salle(salle.name, salle.statut))
         {
             
         }
 
         internal Entretien(int id,
-                          Creneau créneau,
+                          Creneau creneau,
                           EntretienStatut statut,
                           Candidat candidat,
                           Recruteur recruteur,
                           Salle salle)
         {
-            if (recruteur.spécialité != candidat.spécialité)
-                throw new SpécialitéIncompatibleException();
+            if (recruteur.specialite != candidat.specialite)
+                throw new SpecialiteIncompatibleException();
 
-            if (recruteur.expérience <= candidat.expérience)
-                throw new RecruteurSousExpérimenterException();
+            if (recruteur.experience <= candidat.experience)
+                throw new RecruteurSousExperimenterException();
 
-            if (salle.statut == SalleStatut.Occupée)
+            if (salle.statut == SalleStatut.Occupee)
                 throw new SalleOccuperException();
 
             this.id = id;
-            this.créneau = créneau;
+            this.creneau = creneau;
             this.statut = statut;
             this.recruteur = recruteur;
             this.candidat = candidat;
@@ -69,9 +69,9 @@ namespace Model
             this.statut = EntretienStatut.Annuler;
         }
 
-        public void Replanifier(CréneauDto creneau)
+        public void Replanifier(CreneauDto creneau)
         {
-            créneau = new Creneau(creneau.date, creneau.durée);
+            this.creneau = new Creneau(creneau.date, creneau.duree);
             statut = EntretienStatut.Replanifier;
         }
 
@@ -90,9 +90,9 @@ namespace Model
             return base.GetHashCode();
         }
 
-        public bool PeutPrécéder(Entretien autreEntretien)
+        public bool PeutPreceder(Entretien autreEntretien)
         {
-            if (autreEntretien.créneau.fin <= this.créneau.début
+            if (autreEntretien.creneau.fin <= this.creneau.debut
                 && this.candidat == autreEntretien.candidat)
                 return true;
             return false;
@@ -100,7 +100,7 @@ namespace Model
 
         public bool PeutSuivre(Entretien autreEntretien)
         {
-            if (autreEntretien.créneau.début >= this.créneau.fin
+            if (autreEntretien.creneau.debut >= this.creneau.fin
                 && this.candidat == autreEntretien.candidat)
                 return true;
             return false;
@@ -108,7 +108,7 @@ namespace Model
 
         public bool PeutSePlanifierParRapport(Entretien entretien)
         {
-            if (entretien.créneau == créneau)
+            if (entretien.creneau == creneau)
             {
                 if (entretien.candidat == candidat)
                     return false;

@@ -8,7 +8,7 @@ namespace Commun.Dto
     {
 
         public string name;
-        public Spécialité spécialité;
-        public TimeSpan expérience;
+        public Specialite specialite;
+        public TimeSpan experience;
     }
 }

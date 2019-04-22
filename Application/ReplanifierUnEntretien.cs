@@ -9,11 +9,11 @@ namespace Application
     public class ReplanifierUnEntretien : IUseCase<Entretien>
     {
         private int id;
-        private CréneauDto créneau;
-        public ReplanifierUnEntretien(int id, CréneauDto créneau)
+        private CreneauDto creneau;
+        public ReplanifierUnEntretien(int id, CreneauDto creneau)
         {
             this.id = id;
-            this.créneau = créneau;
+            this.creneau = creneau;
         }
 
         public IEnumerable<Entretien> Execute(List<Entretien> enume)
@@ -22,7 +22,7 @@ namespace Application
             {
                 Entretien entretien = enume.Find(ent => ent.id == id);
                 enume.Remove(entretien);
-                entretien.Replanifier(créneau);
+                entretien.Replanifier(creneau);
                 enume.Add(entretien);
                 return enume;
             }

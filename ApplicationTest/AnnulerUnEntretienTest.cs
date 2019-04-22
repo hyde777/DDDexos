@@ -15,28 +15,28 @@ namespace ApplicationTest
         [SetUp]
         public void Setup()
         {
-            CréneauDto créneau = new CréneauDto
+            CreneauDto creneau = new CreneauDto
             {
                 date = new DateTime(2019, 10, 9, 10, 00, 00),
-                durée = TimeSpan.FromHours(2)
+                duree = TimeSpan.FromHours(2)
             };
 
             CandidatDto candidat = new CandidatDto
             {
-                expérience = TimeSpan.FromDays(500),
+                experience = TimeSpan.FromDays(500),
                 name = "Willy",
-                spécialité = Spécialité.csharp
+                specialite = Specialite.csharp
             };
 
             RecruteurDto recruteur = new RecruteurDto
             {
-                expérience = TimeSpan.FromDays(5000),
+                experience = TimeSpan.FromDays(5000),
                 name = "Yohan",
-                spécialité = Spécialité.csharp
+                specialite = Specialite.csharp
             };
 
             SalleDto salle = new SalleDto { name = "kilimanjaro", statut = SalleStatut.Libre };
-            planifierUnEntretien = new PlanifierUnEntretien(1, créneau, candidat, recruteur, salle);
+            planifierUnEntretien = new PlanifierUnEntretien(1, creneau, candidat, recruteur, salle);
         }
 
         [Test]

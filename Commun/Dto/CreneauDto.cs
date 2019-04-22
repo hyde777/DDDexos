@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Commun.Dto
 {
-    public class CréneauDto
+    public class CreneauDto
     {
         public DateTime date;
-        public TimeSpan durée;
+        public TimeSpan duree;
     }
 }

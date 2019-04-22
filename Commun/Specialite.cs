@@ -1,6 +1,6 @@
 ﻿namespace Commun
 {
-    public enum Spécialité
+    public enum Specialite
     {
         csharp,
         java,

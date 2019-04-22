@@ -6,22 +6,22 @@ namespace Model
     internal class Recruteur
     {
         public readonly string nom;
-        internal readonly Spécialité spécialité;
-        public readonly TimeSpan expérience;
+        internal readonly Specialite specialite;
+        public readonly TimeSpan experience;
 
-        internal Recruteur(string name, Spécialité spécialité, TimeSpan jourDexpérience)
+        internal Recruteur(string name, Specialite specialite, TimeSpan jourDexperience)
         {
             this.nom = name;
-            this.spécialité = spécialité;
-            this.expérience = jourDexpérience;
+            this.specialite = specialite;
+            this.experience = jourDexperience;
         }
 
         public override bool Equals(object obj)
         {
             if(obj is Recruteur r)
                 if (r.nom == nom 
-                    && r.spécialité == spécialité
-                    && r.expérience == expérience)
+                    && r.specialite == specialite
+                    && r.experience == experience)
                     return true;
 
             return false;

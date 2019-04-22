@@ -11,7 +11,7 @@ namespace Tests
         private Creneau creneau;
         private EntretienStatut statut;
         private Candidat candidatCsharp;
-        private Recruteur recruteurCsharpExpérimenter;
+        private Recruteur recruteurCsharpExperimenter;
         private Recruteur recruteurJava;
         private Salle salle1;
         private Salle salle2;
@@ -21,11 +21,11 @@ namespace Tests
         {
             creneau = new Creneau(new DateTime(2019, 10, 10, 9, 0, 0), TimeSpan.FromHours(2));
             statut = EntretienStatut.Planifier;
-            candidatCsharp = new Candidat("yoyo", Spécialité.csharp, TimeSpan.FromDays(1000));
-            recruteurCsharpExpérimenter = new Recruteur("Arnaud", Spécialité.csharp, TimeSpan.FromDays(20000));
-            recruteurJava = new Recruteur("rahma", Spécialité.java, TimeSpan.FromDays(300));
+            candidatCsharp = new Candidat("yoyo", Specialite.csharp, TimeSpan.FromDays(1000));
+            recruteurCsharpExperimenter = new Recruteur("Arnaud", Specialite.csharp, TimeSpan.FromDays(20000));
+            recruteurJava = new Recruteur("rahma", Specialite.java, TimeSpan.FromDays(300));
             salle1 = new Salle("Wagram", SalleStatut.Libre);
-            salle2 = new Salle("République", SalleStatut.Libre);
+            salle2 = new Salle("Republique", SalleStatut.Libre);
         }
 
         [Test]
@@ -36,7 +36,7 @@ namespace Tests
                 creneau,
                 statut,
                 candidatCsharp,
-                recruteurCsharpExpérimenter,
+                recruteurCsharpExperimenter,
                 salle1);
 
             Entretien autreEntretien = new Entretien(
@@ -44,7 +44,7 @@ namespace Tests
                 creneau,
                 statut,
                 candidatCsharp,
-                recruteurCsharpExpérimenter,
+                recruteurCsharpExperimenter,
                 salle2);
 
             Assert.That(sut, Is.Not.EqualTo(autreEntretien));
@@ -59,7 +59,7 @@ namespace Tests
                 creneau,
                 statut,
                 candidatCsharp,
-                recruteurCsharpExpérimenter,
+                recruteurCsharpExperimenter,
                 salle1);
             sut.Confirmer();
 
@@ -75,7 +75,7 @@ namespace Tests
                 creneau,
                 statut,
                 candidatCsharp,
-                recruteurCsharpExpérimenter,
+                recruteurCsharpExperimenter,
                 salle1);
             sut.Annuler("Une raison d'annullation");
             Assert.That(sut.statut, Is.EqualTo(EntretienStatut.Annuler));
@@ -89,11 +89,11 @@ namespace Tests
                 creneau,
                 statut,
                 candidatCsharp,
-                recruteurCsharpExpérimenter,
+                recruteurCsharpExperimenter,
                 salle1);
-            sut.Replanifier(new CréneauDto { date = new DateTime(2020, 10, 10, 9, 0, 0), durée = TimeSpan.FromHours(2) });
+            sut.Replanifier(new CreneauDto { date = new DateTime(2020, 10, 10, 9, 0, 0), duree = TimeSpan.FromHours(2) });
             Assert.That(sut.statut, Is.EqualTo(EntretienStatut.Replanifier));
-            Assert.That(sut.créneau, Is.Not.EqualTo(creneau));
+            Assert.That(sut.creneau, Is.Not.EqualTo(creneau));
         }
 
         [Test]
@@ -104,7 +104,7 @@ namespace Tests
                 creneau,
                 statut,
                 candidatCsharp,
-                recruteurCsharpExpérimenter,
+                recruteurCsharpExperimenter,
                 salle1);
 
             Entretien autreEntretien = new Entretien(
@@ -112,11 +112,11 @@ namespace Tests
                 creneau,
                 statut,
                 candidatCsharp,
-                new Recruteur("Felix", Spécialité.csharp, TimeSpan.FromDays(1200)),
+                new Recruteur("Felix", Specialite.csharp, TimeSpan.FromDays(1200)),
                 salle2);
 
             Assert.That(sut.PeutSuivre(autreEntretien), Is.EqualTo(false));
-            Assert.That(sut.PeutPrécéder(autreEntretien), Is.EqualTo(false));
+            Assert.That(sut.PeutPreceder(autreEntretien), Is.EqualTo(false));
             Assert.That(sut.PeutSePlanifierParRapport(autreEntretien), Is.EqualTo(false));
         }
 
@@ -128,62 +128,62 @@ namespace Tests
                 creneau,
                 statut,
                 candidatCsharp,
-                recruteurCsharpExpérimenter,
+                recruteurCsharpExperimenter,
                 salle1);
 
-            Creneau justeAprèsLautreCréneau = new Creneau(entretien.créneau.fin, TimeSpan.FromHours(2));
+            Creneau justeAprèsLautreCreneau = new Creneau(entretien.creneau.fin, TimeSpan.FromHours(2));
             Entretien sut = new Entretien(
                 3,
-                justeAprèsLautreCréneau,
+                justeAprèsLautreCreneau,
                 statut,
                 candidatCsharp,
-                recruteurCsharpExpérimenter,
+                recruteurCsharpExperimenter,
                 salle2);
 
             Assert.That(entretien.PeutSuivre(sut), Is.EqualTo(true));
         }
 
         [Test]
-        public void Un_entretien_peut_précédé_un_autre_entretien_avec_un_même_candidat()
+        public void Un_entretien_peut_precede_un_autre_entretien_avec_un_même_candidat()
         {
             Entretien entretien = new Entretien(
                 2,
                 creneau,
                 statut,
                 candidatCsharp,
-                recruteurCsharpExpérimenter,
+                recruteurCsharpExperimenter,
                 salle1);
 
-            DateTime deuxheuresAvantEntretien = entretien.créneau.début - TimeSpan.FromHours(2);
-            Creneau justeAvantLautreCréneau = new Creneau(deuxheuresAvantEntretien, TimeSpan.FromHours(2));
+            DateTime deuxheuresAvantEntretien = entretien.creneau.debut - TimeSpan.FromHours(2);
+            Creneau justeAvantLautreCreneau = new Creneau(deuxheuresAvantEntretien, TimeSpan.FromHours(2));
             Entretien sut = new Entretien(
                 3,
-                justeAvantLautreCréneau,
+                justeAvantLautreCreneau,
                 statut,
                 candidatCsharp,
-                recruteurCsharpExpérimenter,
+                recruteurCsharpExperimenter,
                 salle2);
 
-            Assert.That(entretien.PeutPrécéder(sut), Is.EqualTo(true));
+            Assert.That(entretien.PeutPreceder(sut), Is.EqualTo(true));
         }
 
         [Test]
-        public void Deux_Recruteur_peuvent_faire_passer_deux_entretien_dans_le_même_créneau()
+        public void Deux_Recruteur_peuvent_faire_passer_deux_entretien_dans_le_même_creneau()
         {
             Entretien entretien = new Entretien(
                 2,
                 creneau,
                 statut,
                 candidatCsharp,
-                recruteurCsharpExpérimenter,
+                recruteurCsharpExperimenter,
                 salle1);
 
             Entretien sut = new Entretien(
                 3,
                 creneau,
                 statut,
-                new Candidat("Hamza", Spécialité.c, TimeSpan.FromDays(200)),
-                new Recruteur("Robin", Spécialité.c, TimeSpan.FromDays(700)),
+                new Candidat("Hamza", Specialite.c, TimeSpan.FromDays(200)),
+                new Recruteur("Robin", Specialite.c, TimeSpan.FromDays(700)),
                 salle2);
 
             Assert.That(sut.PeutSePlanifierParRapport(entretien), Is.EqualTo(true));
@@ -197,24 +197,24 @@ namespace Tests
                 creneau,
                 statut,
                 candidatCsharp,
-                recruteurCsharpExpérimenter,
+                recruteurCsharpExperimenter,
                 salle1);
 
             Entretien sut = new Entretien(
                 3,
                 creneau,
                 statut,
-                new Candidat("Leeroy", Spécialité.csharp, TimeSpan.FromDays(2)),
-                recruteurCsharpExpérimenter,
+                new Candidat("Leeroy", Specialite.csharp, TimeSpan.FromDays(2)),
+                recruteurCsharpExperimenter,
                 salle2);
 
             Assert.That(sut.PeutSePlanifierParRapport(entretien), Is.False);
         }
 
         [Test]
-        public void Un_entretien_doit_être_planifier_entre_un_candidat_et_un_recruteur_de_même_spécialité()
+        public void Un_entretien_doit_être_planifier_entre_un_candidat_et_un_recruteur_de_même_specialite()
         {
-            Assert.Throws<SpécialitéIncompatibleException>(() => new Entretien(
+            Assert.Throws<SpecialiteIncompatibleException>(() => new Entretien(
                 2,
                 creneau,
                 statut,
@@ -224,50 +224,50 @@ namespace Tests
         }
 
         [Test]
-        public void Un_recruteur_ne_peut_pas_faire_passer_entretien_où_il_a_moins_dexpérience_que_le_candidat()
+        public void Un_recruteur_ne_peut_pas_faire_passer_entretien_où_il_a_moins_dexperience_que_le_candidat()
         {
-            Recruteur recruteurCSharpSousExpérimenter = new Recruteur("mickael", Spécialité.csharp, TimeSpan.FromDays(700));
-            Assert.Throws<RecruteurSousExpérimenterException>(() => new Entretien(
+            Recruteur recruteurCSharpSousExperimenter = new Recruteur("mickael", Specialite.csharp, TimeSpan.FromDays(700));
+            Assert.Throws<RecruteurSousExperimenterException>(() => new Entretien(
                 2,
                 creneau,
                 statut,
                 candidatCsharp,
-                recruteurCSharpSousExpérimenter,
+                recruteurCSharpSousExperimenter,
                 salle1));
         }
 
 
         [Test]
-        public void Deux_entretiens_du_même_créneau_ne_peuvent_pas_être_passer_dans_la_même_salle()
+        public void Deux_entretiens_du_même_creneau_ne_peuvent_pas_être_passer_dans_la_même_salle()
         {
             Entretien sut = new Entretien(
                 2,
                 creneau,
                 statut,
                 candidatCsharp,
-                recruteurCsharpExpérimenter,
+                recruteurCsharpExperimenter,
                 salle1);
             Entretien autreEntretien = new Entretien(
                 3,
                 creneau,
                 statut,
-                new Candidat("Louis", Spécialité.java, TimeSpan.FromDays(500)),
-                new Recruteur("Candice", Spécialité.java, TimeSpan.FromDays(700)),
+                new Candidat("Louis", Specialite.java, TimeSpan.FromDays(500)),
+                new Recruteur("Candice", Specialite.java, TimeSpan.FromDays(700)),
                 salle1);
 
             Assert.That(sut.PeutSePlanifierParRapport(autreEntretien), Is.False);
         }
 
         [Test]
-        public void Un_entretien_ne_peut_pas_être_planifier_dans_une_salle_occupé()
+        public void Un_entretien_ne_peut_pas_être_planifier_dans_une_salle_occupe()
         {
-            Salle salleOccuper = new Salle("Kilimanjaro", SalleStatut.Occupée);
+            Salle salleOccuper = new Salle("Kilimanjaro", SalleStatut.Occupee);
             Assert.Throws<SalleOccuperException>(() => new Entretien(
                 2,
                 creneau,
                 statut,
                 candidatCsharp,
-                recruteurCsharpExpérimenter,
+                recruteurCsharpExperimenter,
                 salleOccuper));
         }
     }

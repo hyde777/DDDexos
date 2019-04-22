@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model
 {
-    internal class RecruteurSousExpérimenterException : Exception
+    internal class RecruteurSousExperimenterException : Exception
     {
     }
 }
