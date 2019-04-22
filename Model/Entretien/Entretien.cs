@@ -93,7 +93,7 @@ namespace Model
         public bool PeutPreceder(Entretien autreEntretien)
         {
             if (autreEntretien.creneau.fin <= this.creneau.debut
-                && this.candidat == autreEntretien.candidat)
+                && this.candidat.Equals(autreEntretien.candidat))
                 return true;
             return false;
         }
@@ -101,22 +101,22 @@ namespace Model
         public bool PeutSuivre(Entretien autreEntretien)
         {
             if (autreEntretien.creneau.debut >= this.creneau.fin
-                && this.candidat == autreEntretien.candidat)
+                && this.candidat.Equals(autreEntretien.candidat))
                 return true;
             return false;
         }
 
         public bool PeutSePlanifierParRapport(Entretien entretien)
         {
-            if (entretien.creneau == creneau)
+            if (entretien.creneau.Equals(creneau))
             {
-                if (entretien.candidat == candidat)
+                if (entretien.candidat.Equals(candidat))
                     return false;
 
-                if (entretien.recruteur == recruteur)
+                if (entretien.recruteur.Equals(recruteur))
                     return false;
 
-                if (entretien.salle == salle)
+                if (entretien.salle.Equals(salle))
                     return false;
             }
             return true;
