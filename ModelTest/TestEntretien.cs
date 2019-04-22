@@ -77,7 +77,7 @@ namespace Tests
                 candidatCsharp,
                 recruteurCsharpExperimenter,
                 salle1);
-            sut.Annuler("Une raison d'annullation");
+            sut.Annuler(new RaisonDto { raison = "Une raison d'annullation" });
             Assert.That(sut.statut, Is.EqualTo(EntretienStatut.Annuler));
         }
 

@@ -14,7 +14,7 @@ namespace Model
         internal readonly Candidat candidat;
         private readonly Salle salle;
         private Recruteur recruteur;
-        private Raison raison;
+        private string raison;
 
         internal Creneau creneau { get; private set; }
 
@@ -63,9 +63,9 @@ namespace Model
             this.statut = EntretienStatut.Confirmer;
         }
 
-        public void Annuler(string raisonName)
+        public void Annuler(RaisonDto raison)
         {
-            this.raison = new Raison(raisonName);
+            this.raison = raison.raison;
             this.statut = EntretienStatut.Annuler;
         }
 
